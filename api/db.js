@@ -1,24 +1,23 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 export const getDataByParams = async (req, res, next) => {
-    const { city, cityName } = req.params
-    let data = await prisma.city.findMany({
-        where: {
-            city: {
-                equals: city,
-                mode: 'insensitive',
-            },
-        },
-        include: {
-            cityName: {
-                where: {
-                    ...(cityName ? { cityName: cityName } : {}),
-                },
-            },
-        },
-    })
-    if (cityName) data = data.map(({ city, ...rest }) => rest)
-    res.status(200).send(data)
-}
+  const { city, cityName } = req.query;
+  let data;
+
+  if (!cityName) {
+    data = await prisma.city.findMany({
+      where: {
+        name: city,
+      },
+    });
+  } else {
+    data =
+      await prisma.$queryRaw`select * from city as ct inner join CitiInfo as ct_info 
+        where ct.id = ct_info.city_id
+        and ct.name = ${city} and ct_info.city_name = ${cityName}`;
+  }
+
+  res.status(200).send(data);
+};
