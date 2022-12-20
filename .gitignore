@@ -12,3 +12,8 @@
 
 /json
 /csv
+
+.env
+
+node_modules
+yarn.lock
