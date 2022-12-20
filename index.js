@@ -1,7 +1,8 @@
-const Xray = require("x-ray");
+import Xray from "x-ray";
 const x = Xray();
-const fs = require("fs/promises");
-const createCsvWriter = require("csv-writer").createObjectCsvWriter;
+import fs from "fs/promises";
+import csvWriter from "csv-writer";
+const createCsvWriter = csvWriter.createObjectCsvWriter;
 
 const listUrl = [
   "https://www.at-parking.jp/search/hokkaido/",
