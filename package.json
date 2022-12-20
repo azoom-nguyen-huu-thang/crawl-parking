@@ -1,6 +1,7 @@
 {
   "name": "crawl",
   "scripts": {
+    "build": "mkdir csv && mkdir json",
     "dev": "node ."
   },
   "packageManager": "yarn@3.3.0",
