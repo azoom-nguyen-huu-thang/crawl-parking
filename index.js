@@ -1,7 +1,9 @@
 import Xray from "x-ray";
-const x = Xray();
 import fs from "fs/promises";
 import csvWriter from "csv-writer";
+import path from "path";
+
+const x = Xray();
 const createCsvWriter = csvWriter.createObjectCsvWriter;
 
 const listUrl = [
@@ -120,12 +122,12 @@ async function main() {
     const res = await Promise.all(listUrl.map((url) => crawlingData(url)));
     await Promise.all(
       res.map(async ({ city, data }) => {
-        fs.writeFile(`${__dirname}/json/${city}.json`, JSON.stringify(data));
+        fs.writeFile(`./json/${city}.json`, JSON.stringify(data));
       })
     );
 
     res.map(async ({ city }) => {
-      const file = await fs.readFile(`json/${city}.json`, "utf-8");
+      const file = await fs.readFile(`./json/${city}.json`, "utf-8");
       const jsonData = JSON.parse(file);
       const header = Object.keys(jsonData[0]).map((k) => {
         return {
