@@ -114,7 +114,7 @@ const crawlingData = async (url) => {
   }
 };
 
-async function main() {
+const main = async () => {
   try {
     const res = await Promise.all(listUrl.map((url) => crawlingData(url)));
     await Promise.all(
@@ -126,23 +126,22 @@ async function main() {
     res.map(async ({ city }) => {
       const file = await fs.readFile(`json/${city}.json`, "utf-8");
       const jsonData = JSON.parse(file);
-      const header = Object.keys(jsonData[0]).map((k) => {
+      const header = Object.keys(jsonData[0]).map((key) => {
         return {
-          id: k,
-          title: k,
+          id: key,
+          title: key,
         };
       });
       const csvWriter = createCsvWriter({
         path: `csv/${city}.csv`,
         header,
       });
-      csvWriter.writeRecords(jsonData).then(() => {
-        console.log(`Done writing CSV file for ${city}`);
-      });
+      await csvWriter.writeRecords(jsonData);
+      console.log(`Done writing CSV file for ${city}`);
     });
   } catch (err) {
     console.error(err);
   }
-}
+};
 
 main();
