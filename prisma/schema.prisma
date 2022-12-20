@@ -18,9 +18,9 @@ model City {
 
 model CitiInfo {
   id       Int    @id @default(autoincrement())
-  cityName String @map("city_name") @db.VarChar(20)
-  townName String @map("town_name") @db.VarChar(20)
-  count    Int
+  cityName String @map("city_name")
+  townName String @map("town_name")
+  count    String @db.VarChar(20)
   cityId   Int    @map("city_id")
   city     City   @relation(fields: [cityId], references: [id], onDelete: Cascade)
 }
