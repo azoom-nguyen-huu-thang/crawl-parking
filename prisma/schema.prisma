@@ -1,0 +1,26 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model City {
+  id       Int        @id @default(autoincrement())
+  name     String     @db.VarChar(20)
+  citiInfo CitiInfo[]
+}
+
+model CitiInfo {
+  id       Int    @id @default(autoincrement())
+  cityName String @map("city_name")
+  townName String @map("town_name")
+  count    String @db.VarChar(20)
+  cityId   Int    @map("city_id")
+  city     City   @relation(fields: [cityId], references: [id], onDelete: Cascade)
+}

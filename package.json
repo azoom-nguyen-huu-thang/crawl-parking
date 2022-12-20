@@ -2,11 +2,14 @@
   "name": "crawl",
   "scripts": {
     "build": "mkdir csv && mkdir json",
-    "dev": "node ."
+    "dev": "node .",
+    "seed": "node ./prisma/seed/seed.js"
   },
   "packageManager": "yarn@3.3.0",
   "dependencies": {
+    "@prisma/client": "4.7.1",
     "csv-writer": "^1.6.0",
+    "prisma": "^4.7.1",
     "x-ray": "^2.3.4"
   }
 }
