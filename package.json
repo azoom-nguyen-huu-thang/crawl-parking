@@ -1,0 +1,11 @@
+{
+  "name": "crawl",
+  "scripts": {
+    "dev": "node ."
+  },
+  "packageManager": "yarn@3.3.0",
+  "dependencies": {
+    "csv-writer": "^1.6.0",
+    "x-ray": "^2.3.4"
+  }
+}
