@@ -10,11 +10,12 @@
   "packageManager": "yarn@3.3.0",
   "dependencies": {
     "@prisma/client": "4.7.1",
+    "cors": "^2.8.5",
     "csv-writer": "^1.6.0",
-    "prisma": "^4.7.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "nodemon": "^2.0.20",
+    "prisma": "^4.7.1",
     "x-ray": "^2.3.4"
   }
 }
